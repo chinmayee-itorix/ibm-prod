@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="Acme-Bank-Loans">
+    <Description>Acme Bank Loans</Description>
+	<FaultRules>
+	</FaultRules>
+	<DefaultFaultRule>
+            <Step>
+                <Name>SF-PostflowResponseTargetLogAggregator</Name>
+            </Step>
+    	<AlwaysEnforce>true</AlwaysEnforce>
+	</DefaultFaultRule>
+	<PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>SF-PreflowRequestTargetLogAggregator</Name>
+            </Step>
+            <Step>
+                <Name>cf-Remove-Proxy-Auth-Header</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+	<Flows>
+        <Flow name="getLoanProductById">
+        	<Condition>(targetOperation = &quot;getLoanProductById&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="updateLoanProductById">
+        	<Condition>(targetOperation = &quot;updateLoanProductById&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="deleteLoanProductById">
+        	<Condition>(targetOperation = &quot;deleteLoanProductById&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetAllLoanProducts">
+        	<Condition>(targetOperation = &quot;GetAllLoanProducts&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="CreateLoanProduct">
+        	<Condition>(targetOperation = &quot;CreateLoanProduct&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetLoanTransactionById">
+        	<Condition>(targetOperation = &quot;GetLoanTransactionById&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+        <Flow name="GetAllTransactionsByLoanAccountId">
+        	<Condition>(targetOperation = &quot;GetAllTransactionsByLoanAccountId&quot;)</Condition>
+			<Request>
+			</Request>   
+			<Response>
+			</Response>
+        </Flow>
+	</Flows>
+    <PostFlow name="PostFlow">
+        <Request>
+            <Step>
+                <Name>SF-PostflowRequestTargetLogAggregator</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>SF-PostflowResponseTargetLogAggregator</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <HTTPTargetConnection>
+    	<LoadBalancer>
+            <Server name="Acme-Bank-Loans">
+                <IsEnabled>true</IsEnabled>
+            </Server>
+        </LoadBalancer>
+        <Path>/</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>
